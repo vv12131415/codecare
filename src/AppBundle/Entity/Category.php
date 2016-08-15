@@ -79,9 +79,7 @@ class Category
         $this->name = $name;
     }
 
-    /**
-     * @return ArrayCollection
-     */
+
     public function getProducts()
     {
         return $this->products;

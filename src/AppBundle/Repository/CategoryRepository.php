@@ -1,6 +1,7 @@
 <?php
 
 namespace UserBundle\Repository;
+
 use AppBundle\Entity\Category;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,18 +17,13 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
-    /**
-     * @param $username
-     * @return Category|null
-     */
-    public function findOneByIdOrName($category)
+
+    public function findByProductJoinedToCategory($category)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.id = :id OR u.name = :name')
-            ->setParameter('id', $category)
-            ->setParameter('name', $category)
-            ->getQuery()
-            ->getOneOrNullResult();
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c FROM AppBundle:Category c ORDER BY c.name ASC'
+            )->getResult();
     }
 
     public function loadCategoryByName($category_name)

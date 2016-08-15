@@ -28,15 +28,23 @@ class IndexController extends Controller
     public function categoryAction(Request $request, $category_name)
     {
         $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
         $category = $em->getRepository('AppBundle:Category')->findOneByName($category_name);
-        $product = $em->getRepository('AppBundle:Product')->findOneByName('iPhone');
 
-        $category->addProducts($product);
 
-        $em->flush();
 
         return $this->render('AppBundle:Index:category.html.twig', [
+            'categories' => $categories,
             'category' => $category,
         ]);
     }
 }
+
+
+
+
+/*        $product = $em->getRepository('AppBundle:Product')->findOneByName('iPhone');
+
+        $category->addProducts($product);
+
+        $em->flush();*/

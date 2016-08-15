@@ -1,5 +1,13 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-                <h1>{{ category.name }}</h1>
+    All categories {% for category in categories %}
+    {{ category.name }}
+    {% endfor %}
+    <div>This category is <h5>{{ category.name }}</h5></div>
+    <p>
+    {%  for product in category.getProducts %}
+        {{ product.name }}
+    {% endfor %}
+    </p>
 {% endblock %}
