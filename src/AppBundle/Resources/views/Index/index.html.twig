@@ -1,0 +1,11 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    {% for product in products %}
+        <h1>{{ product.name }}</h1>
+
+    {% endfor %}
+    {% for category in categories %}
+        <ul>{{ category.name }}</ul>
+    {% endfor %}
+{% endblock %}

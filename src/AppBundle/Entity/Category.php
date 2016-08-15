@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,10 +30,22 @@ class Category
      *
      * @var string
      *
-     * @ORM\Column(name="name", type="text", length=255, nullable=false)
-     * @ORM\ManyToMany(targetEntity="AppBundle/Entity/Product")
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     protected $name;
+
+    /**
+     *
+     * @var string
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product")
+     */
+    protected $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -64,6 +77,14 @@ class Category
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 
 }

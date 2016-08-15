@@ -10,11 +10,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Product")
+ * @ORM\Table(name="product")
  */
 class Product
 {
@@ -30,7 +31,6 @@ class Product
      * @var string
      *
      * @ORM\Column(name="name", type="text", length=255, nullable=false)
-     *  @ORM\ManyToMany(targetEntity="AppBundle/Entity/Product")
      */
     protected $name;
 
