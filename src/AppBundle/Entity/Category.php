@@ -38,7 +38,7 @@ class Category
      *
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", inversedBy="categories")
      */
     protected $products;
 
@@ -86,5 +86,14 @@ class Category
     {
         return $this->products;
     }
+
+    /**
+     * @param \AppBundle\Entity\Product $products
+     */
+    public function addProducts(\AppBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+    }
+
 
 }

@@ -21,7 +21,7 @@ class LoadCategory implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
-        
+
         $category = new Category();
         $category->setName('Test title');
         $manager->persist($category);

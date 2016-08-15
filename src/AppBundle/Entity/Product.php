@@ -35,6 +35,15 @@ class Product
     protected $name;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Category", mappedBy="products")
+     * @ORM\JoinTable(name="product_category",
+     * joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     * inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     * )
+     */
+    protected $categories;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -64,6 +73,22 @@ class Product
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Category $categories
+     */
+    public function addCategories(\AppBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
     }
 
 }
