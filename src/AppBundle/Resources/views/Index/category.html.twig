@@ -1,13 +1,59 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    All categories {% for category in categories %}
-    {{ category.name }}
-    {% endfor %}
-    <div>This category is <h5>{{ category.name }}</h5></div>
-    <p>
-    {%  for product in category.getProducts %}
-        {{ product.name }}
-    {% endfor %}
-    </p>
+
+    <div class="col-xs-2">
+        <h2 class="sub-header"><a href="/">Home</a></h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="col-md-1">Categories</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td class="col-md-1"><a href="{{ category.name }}">{{ category.name }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-10">
+        <h2 class="sub-header" style="text-align: center">Products of {{ category_name }} </h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="col-md-1">Product name</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in category.getProducts %}
+                    <tr>
+                        <td class="col-md-1">{{ product.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    {#                        {% for category in categories %}
+                                <li role="presentation"><a href="{{ category.name }}">{{ category.name }}</a></li>
+                            {% endfor %}
+
+        All categories
+
+        <div>This category is <h5>{{ category.name }}</h5></div>
+        <p>
+        {%  for product in category.getProducts %}
+            {{ product.name }}
+        {% endfor %}
+        </p>#}
 {% endblock %}

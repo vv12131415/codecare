@@ -1,8 +1,41 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    {% for product in products %}
-        <h1>{{ product.name }}</h1>
-
-    {% endfor %}
+    <div class="col-xs-2">
+        <h2 class="sub-header"><a href="/">Home</a></h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="col-md-1">Categories</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td class="col-md-1"><a href="{{ category.name }}">{{ category.name }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-10">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="col-md-1">Product name</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td class="col-md-1">{{ product.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

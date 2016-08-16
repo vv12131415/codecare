@@ -15,10 +15,12 @@ class IndexController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('AppBundle:Product')->findAll();
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
 
 
         return $this->render('AppBundle:Index:index.html.twig', [
             'products' => $products,
+            'categories' => $categories,
         ]);
     }
 
@@ -36,6 +38,7 @@ class IndexController extends Controller
         return $this->render('AppBundle:Index:category.html.twig', [
             'categories' => $categories,
             'category' => $category,
+            'category_name' => $category_name,
         ]);
     }
 }
