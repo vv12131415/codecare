@@ -1,34 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ubuntu
- * Date: 8/15/16
- * Time: 6:42 PM.
- */
+
 
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="category")
- */
+
 class Category
 {
-
     protected $id;
 
     /**
      * @var string
-     *
      */
     protected $name;
 
     /**
      * @var string
-     *
      */
     protected $products;
 

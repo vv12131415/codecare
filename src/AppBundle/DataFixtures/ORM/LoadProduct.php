@@ -2,12 +2,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Product;
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -21,21 +21,30 @@ class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedF
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; ++$i) {
+        $products = [
+            'iPhone 6',
+            'Samsung Galaxy S6',
+            'Xiaomi RedMi 3',
+            'iPhone 6s',
+            'Nokia Lumia',
+            'HTC One M8',
+            'LG Optimus G',
+            'Samsung 4K 32 inch',
+            'Sony 4K 32 inch',
+            'LG 4K 32 inch',
+            'Panasonic 4K 32 inch',
+            'Xiaomi 4K 32 inch',
+            'Sony 4K 40 inch',
+            'Samsung 4K 4- inch',
+        ];
+
+        for ($i = 0; $i < 14; ++$i) {
             $product = new Product();
-            $product->setName('iPhone'.$i);
+            $product->setName($products[$i]);
             $manager->persist($product);
         }
 
         $manager->flush();
-    }
-
-    private function encodePassword(Product $product, $plainPassword)
-    {
-        $encoder = $this->container->get('security.password_encoder');
-        $encoded = $encoder->encodePassword($product, $plainPassword);
-
-        return $encoded;
     }
 
     public function setContainer(ContainerInterface $container = null)
@@ -46,6 +55,6 @@ class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedF
 
     public function getOrder()
     {
-        return 10;
+        return 2;
     }
 }

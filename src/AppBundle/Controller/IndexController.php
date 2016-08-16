@@ -5,10 +5,6 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
-
 
 class IndexController extends Controller
 {
@@ -20,16 +16,15 @@ class IndexController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('AppBundle:Category')->findAll();
 
-        $dql = "SELECT p FROM AppBundle:Product p";
+        $dql = 'SELECT p FROM AppBundle:Product p';
         $query = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
-            $request->query->getInt('page', 1),/*page number*/
+            $request->query->getInt('page', 1), /*page number*/
             5/*limit per page*/
         );
-
 
         return $this->render('AppBundle:Index:index.html.twig', [
             'categories' => $categories,
@@ -51,10 +46,9 @@ class IndexController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
-            $request->query->getInt('page', 1),/*page number*/
+            $request->query->getInt('page', 1), /*page number*/
             5/*limit per page*/
         );
-
 
         return $this->render('AppBundle:Index:category.html.twig', [
             'categories' => $categories,
@@ -63,9 +57,3 @@ class IndexController extends Controller
         ]);
     }
 }
-
-/*        $product = $em->getRepository('AppBundle:Product')->findOneByName('iPhone');
-
-        $category->addProducts($product);
-
-        $em->flush();*/

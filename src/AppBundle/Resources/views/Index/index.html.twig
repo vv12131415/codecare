@@ -3,44 +3,22 @@
 {% block body %}
     <div class="col-xs-2">
         <h2 class="sub-header"><a href="/">Home</a></h2>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th class="col-md-1">Categories</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for category in categories %}
-                    <tr>
-                        <td class="col-md-1"><a href="{{ category.name }}">{{ category.name }}</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        <p type="button" class="btn btn-primary btn-lg btn-block">Categories</p>
+        {% for category in categories %}
+            <a class="btn btn-default btn-lg btn-block" href="{{ category.name }}">{{ category.name }}</a>
+        {% endfor %}
     </div>
     <div class="col-xs-10">
-        <h2 class="sub-header" style="text-align: center">Homepage </h2>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th class="col-md-1">Product name</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for product in pagination %}
-                    <tr>
-                        <td class="col-md-1">{{ product.name }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <div class="text-center">
-                <div class="navigation">
-                    {{ knp_pagination_render(pagination) }}
-                </div>
+        <h2 class="sub-header">Homepage </h2>
+        <p type="button" class="btn btn-primary btn-sm">Product name</p>
+        <hr/>
+        {% for product in pagination %}
+            <p type="button" class="btn btn-default btn-sm">{{ product.name }}</p>
+            <br>
+        {% endfor %}
+        <div class="text-center">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
             </div>
         </div>
     </div>

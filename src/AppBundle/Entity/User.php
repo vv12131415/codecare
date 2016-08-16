@@ -1,18 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ubuntu
- * Date: 4/28/16
- * Time: 1:33 PM
- */
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 class User implements UserInterface, \Serializable
 {
@@ -26,22 +16,28 @@ class User implements UserInterface, \Serializable
      * Just store plain password temporarily!
      *
      * @var string
-     *
      */
     private $plainPassword;
-
 
     private $isActive;
 
     public function __construct()
     {
         $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid(null, true));
     }
 
     /**
-     * Set username
+     * Get username.
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set username.
      *
      * @param string $username
      *
@@ -54,25 +50,23 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getSalt()
+    {
+        return;
+    }
+
     /**
-     * Get username
+     * Get password.
      *
      * @return string
      */
-    public function getUsername()
+    public function getPassword()
     {
-        return $this->username;
-    }
-
-    public function getSalt()
-    {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
+        return $this->password;
     }
 
     /**
-     * Set password
+     * Set password.
      *
      * @param string $password
      *
@@ -85,16 +79,6 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
     public function getRoles()
     {
         return ['ROLE_USER'];
@@ -103,6 +87,7 @@ class User implements UserInterface, \Serializable
     public function setRoles(array $roles)
     {
         $this->roles = $roles;
+
         return $this;
     }
 
@@ -117,27 +102,24 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt,
+
         ]);
     }
 
     /** @see \Serializable::unserialize() */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt
             ) = unserialize($serialized);
     }
 
     /**
-     * Set isActive
+     * Set isActive.
      *
-     * @param boolean $isActive
+     * @param bool $isActive
      *
      * @return User
      */

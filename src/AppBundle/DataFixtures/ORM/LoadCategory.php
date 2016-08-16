@@ -4,10 +4,10 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Category;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class LoadCategory implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -21,25 +21,26 @@ class LoadCategory implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
-        $category = new Category();
-        $category->setName('Test category');
-        $manager->persist($category);
+        $category1 = new Category();
+        $category1->setName('Phones');
 
-        $test = new Category();
-        $test->setName('blabla');
-        $manager->persist($test);
+        $manager->persist($category1);
+
+        $category = new Category();
+        $category->setName('TVs');
+
+        $manager->persist($category);
 
         $manager->flush();
     }
 
     public function setContainer(ContainerInterface $container = null)
     {
-        // TODO: Implement setContainer() method.
         $this->container = $container;
     }
 
     public function getOrder()
     {
-        return 10;
+        return 1;
     }
 }

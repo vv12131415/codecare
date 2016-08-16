@@ -3,11 +3,10 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use AppBundle\Entity\Product;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -21,15 +20,37 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
-            if ($i % 2 == 0) {
-                $category = $manager->getRepository('AppBundle:Category')->findOneByName('blabla');
-                $product = $manager->getRepository('AppBundle:Product')->findOneByName('iPhone' . $i);
+        $products = [
+            'iPhone 6',
+            'Samsung Galaxy S6',
+            'Xiaomi RedMi 3',
+            'iPhone 6s',
+            'Nokia Lumia',
+            'HTC One M8',
+            'LG Optimus G',
+            'Samsung 4K 32 inch',
+            'Sony 4K 32 inch',
+            'LG 4K 32 inch',
+            'Panasonic 4K 32 inch',
+            'Xiaomi 4K 32 inch',
+            'Sony 4K 40 inch',
+            'Samsung 4K 4- inch',
+        ];
+
+        $categories = [
+            'Phones',
+            'TVs',
+        ];
+
+        for ($i = 0; $i < 14; ++$i) {
+            if ($i < 7) {
+                $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[0]);
+                $product = $manager->getRepository('AppBundle:Product')->findOneByName($products[$i]);
 
                 $category->addProducts($product);
             } else {
-                $category = $manager->getRepository('AppBundle:Category')->findOneByName('Test category');
-                $product = $manager->getRepository('AppBundle:Product')->findOneByName('iPhone' . $i);
+                $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[1]);
+                $product = $manager->getRepository('AppBundle:Product')->findOneByName($products[$i]);
 
                 $category->addProducts($product);
             }
@@ -38,13 +59,6 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
         $manager->flush();
     }
 
-    private function encodePassword(Product $product, $plainPassword)
-    {
-        $encoder = $this->container->get('security.password_encoder');
-        $encoded = $encoder->encodePassword($product, $plainPassword);
-
-        return $encoded;
-    }
 
     public function setContainer(ContainerInterface $container = null)
     {

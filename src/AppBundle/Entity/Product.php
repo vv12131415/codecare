@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ubuntu
- * Date: 8/15/16
- * Time: 6:42 PM.
- */
+
 
 namespace AppBundle\Entity;
 
@@ -12,15 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Product
 {
-
     protected $id;
 
     /**
      * @var string
-     *
      */
     protected $name;
-
 
     protected $categories;
 

@@ -2,7 +2,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
     <link rel="stylesheet" href="{{ asset('bundles/app/css/login.css') }}"/>
 {% endblock %}
 
@@ -12,7 +11,6 @@
             <h1>Register</h1>
             <form class="form-group" action="{{ path('user_register') }}" method="post">
                 {{ form_errors(form) }}
-
                 {{ form_row(form.username, {
                     'attr' : {'class':'a-clever-class '},
                     'help' : 'Choose a unique and clever username',
@@ -24,7 +22,6 @@
                 {{ form_row(form.plainPassword.second, {
                     'label' : 'Repeat password:'
                 }) }}
-
                 {{ form_rest(form) }}
                 <hr/>
                 <input type="submit" value="Register!" class="btn btn-primary pull-right"/>

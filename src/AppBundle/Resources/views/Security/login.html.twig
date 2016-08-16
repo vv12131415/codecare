@@ -2,7 +2,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
     <link rel="stylesheet" href="{{ asset('bundles/app/css/login.css') }}"/>
 {% endblock %}
 
@@ -12,20 +11,12 @@
             {% if error %}
                 <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-
             <form class="form-group" action="{{ path('login') }}" method="post">
                 <label for="username">Username:</label>
-                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
+                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"/>
 
                 <label for="password">Password:</label>
-                <input class="form-control" type="password" id="password" name="_password" />
-
-                {#
-                    If you want to control the URL the user
-                    is redirected to on success (more details below)
-                    <input type="hidden" name="_target_path" value="/account" />
-                #}
-
+                <input class="form-control" type="password" id="password" name="_password"/>
                 <hr/>
                 <button class="btn btn-primary pull-right" type="submit">Login</button>
             </form>

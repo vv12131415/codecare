@@ -17,3 +17,4 @@
 vendor/*
 .vagrant/*
 .idea/*
+phpmd.phar
