@@ -59,7 +59,6 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
         $manager->flush();
     }
 
-
     public function setContainer(ContainerInterface $container = null)
     {
         // TODO: Implement setContainer() method.

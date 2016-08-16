@@ -21,9 +21,9 @@ class IndexController extends Controller
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            5/*limit per page*/
+            $query,
+            $request->query->getInt('page', 1),
+            5
         );
 
         return $this->render('AppBundle:Index:index.html.twig', [
@@ -45,9 +45,9 @@ class IndexController extends Controller
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            5/*limit per page*/
+            $query,
+            $request->query->getInt('page', 1),
+            5
         );
 
         return $this->render('AppBundle:Index:category.html.twig', [
