@@ -20,8 +20,8 @@ AppBundle\Entity\Category:
       joinTable:
         name: product_category
         joinColumns:
-          category_id:
+          Category_id:
             referencedColumnName: id
         inverseJoinColumns:
-          product_id:
+          Product_id:
             referencedColumnName: id

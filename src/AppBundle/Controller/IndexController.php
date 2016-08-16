@@ -5,6 +5,10 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+
 
 class IndexController extends Controller
 {
@@ -40,13 +44,9 @@ class IndexController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('AppBundle:Category')->findAll();
-        $category = $em->getRepository('AppBundle:Category')->findOneByName($category_name);
 
-        //$dql = "SELECT p FROM AppBundle:Product p JOIN p.categories c ";
         $dql = "SELECT p FROM AppBundle:Product p JOIN p.categories c WHERE c.name = '$category_name'";
         $query = $em->createQuery($dql);
-
-
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -58,7 +58,6 @@ class IndexController extends Controller
 
         return $this->render('AppBundle:Index:category.html.twig', [
             'categories' => $categories,
-            'category' => $category,
             'category_name' => $category_name,
             'pagination' => $pagination,
         ]);
