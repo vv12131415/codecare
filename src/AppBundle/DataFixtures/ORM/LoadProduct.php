@@ -38,7 +38,7 @@ class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedF
             'Samsung 4K 4- inch',
         ];
 
-        for ($i = 0; $i < 14; ++$i) {
+        for ($i = 0; $i < count($products); ++$i) {
             $product = new Product();
             $product->setName($products[$i]);
             $manager->persist($product);

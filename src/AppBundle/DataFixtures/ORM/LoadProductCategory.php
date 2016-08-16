@@ -20,7 +20,7 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        $products = [
+        $phones = [
             'iPhone 6',
             'Samsung Galaxy S6',
             'Xiaomi RedMi 3',
@@ -28,6 +28,9 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
             'Nokia Lumia',
             'HTC One M8',
             'LG Optimus G',
+        ];
+
+        $tvs = [
             'Samsung 4K 32 inch',
             'Sony 4K 32 inch',
             'LG 4K 32 inch',
@@ -42,18 +45,18 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
             'TVs',
         ];
 
-        for ($i = 0; $i < 14; ++$i) {
-            if ($i < 7) {
-                $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[0]);
-                $product = $manager->getRepository('AppBundle:Product')->findOneByName($products[$i]);
+        for ($i = 0; $i < count($phones); $i++) {
+            $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[0]);
+            $product = $manager->getRepository('AppBundle:Product')->findOneByName($phones[$i]);
 
-                $category->addProducts($product);
-            } else {
-                $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[1]);
-                $product = $manager->getRepository('AppBundle:Product')->findOneByName($products[$i]);
+            $category->addProducts($product);
+        }
 
-                $category->addProducts($product);
-            }
+        for ($i = 0; $i < count($tvs); $i++) {
+            $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[1]);
+            $product = $manager->getRepository('AppBundle:Product')->findOneByName($tvs[$i]);
+
+            $category->addProducts($product);
         }
 
         $manager->flush();
