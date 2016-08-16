@@ -3,15 +3,13 @@
  * Created by PhpStorm.
  * User: ubuntu
  * Date: 8/15/16
- * Time: 6:42 PM
+ * Time: 6:42 PM.
  */
 
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * @ORM\Entity
@@ -19,26 +17,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Category
 {
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+
     protected $id;
 
     /**
-     *
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     protected $name;
 
     /**
-     *
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", inversedBy="categories")
      */
     protected $products;
 
@@ -79,7 +69,6 @@ class Category
         $this->name = $name;
     }
 
-
     public function getProducts()
     {
         return $this->products;
@@ -92,6 +81,4 @@ class Category
     {
         $this->products[] = $products;
     }
-
-
 }

@@ -17,7 +17,6 @@ class IndexController extends Controller
         $products = $em->getRepository('AppBundle:Product')->findAll();
         $categories = $em->getRepository('AppBundle:Category')->findAll();
 
-
         return $this->render('AppBundle:Index:index.html.twig', [
             'products' => $products,
             'categories' => $categories,
@@ -33,8 +32,6 @@ class IndexController extends Controller
         $categories = $em->getRepository('AppBundle:Category')->findAll();
         $category = $em->getRepository('AppBundle:Category')->findOneByName($category_name);
 
-
-
         return $this->render('AppBundle:Index:category.html.twig', [
             'categories' => $categories,
             'category' => $category,
@@ -42,9 +39,6 @@ class IndexController extends Controller
         ]);
     }
 }
-
-
-
 
 /*        $product = $em->getRepository('AppBundle:Product')->findOneByName('iPhone');
 

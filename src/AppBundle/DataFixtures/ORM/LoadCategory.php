@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Category;
@@ -7,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-
 
 class LoadCategory implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -21,19 +21,16 @@ class LoadCategory implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
-
         $category = new Category();
-        $category->setName('Test title');
+        $category->setName('Test category');
         $manager->persist($category);
 
-
         $test = new Category();
-        $test->setName('bla');
+        $test->setName('blabla');
         $manager->persist($test);
 
         $manager->flush();
     }
-
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -45,5 +42,4 @@ class LoadCategory implements FixtureInterface, ContainerAwareInterface, Ordered
     {
         return 10;
     }
-
 }

@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -21,10 +21,18 @@ class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedF
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; ++$i) {
-            $product = new Product();
-            $product->setName('iPhone'.$i);
-            $manager->persist($product);
+        for($i = 0; $i < 20; $i++){
+            if ($i % 2 == 0) {
+                $category = $manager->getRepository('AppBundle:Category')->findOneByName('blabla');
+                $product = $manager->getRepository('AppBundle:Product')->findOneByName('iPhone' . $i);
+
+                $category->addProducts($product);
+            } else {
+                $category = $manager->getRepository('AppBundle:Category')->findOneByName('Test category');
+                $product = $manager->getRepository('AppBundle:Product')->findOneByName('iPhone' . $i);
+
+                $category->addProducts($product);
+            }
         }
 
         $manager->flush();
