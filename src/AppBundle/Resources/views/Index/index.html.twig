@@ -21,6 +21,7 @@
         </div>
     </div>
     <div class="col-xs-10">
+        <h2 class="sub-header" style="text-align: center">Homepage </h2>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -29,13 +30,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for product in products %}
+                {% for product in pagination %}
                     <tr>
                         <td class="col-md-1">{{ product.name }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="text-center">
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

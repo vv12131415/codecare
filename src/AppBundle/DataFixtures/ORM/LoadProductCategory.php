@@ -21,7 +21,7 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        for($i = 0; $i < 20; $i++){
+        for ($i = 0; $i < 20; $i++) {
             if ($i % 2 == 0) {
                 $category = $manager->getRepository('AppBundle:Category')->findOneByName('blabla');
                 $product = $manager->getRepository('AppBundle:Product')->findOneByName('iPhone' . $i);

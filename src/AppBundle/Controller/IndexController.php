@@ -14,12 +14,22 @@ class IndexController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $products = $em->getRepository('AppBundle:Product')->findAll();
         $categories = $em->getRepository('AppBundle:Category')->findAll();
 
+        $dql = "SELECT p FROM AppBundle:Product p";
+        $query = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1),/*page number*/
+            5/*limit per page*/
+        );
+
+
         return $this->render('AppBundle:Index:index.html.twig', [
-            'products' => $products,
             'categories' => $categories,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -32,10 +42,25 @@ class IndexController extends Controller
         $categories = $em->getRepository('AppBundle:Category')->findAll();
         $category = $em->getRepository('AppBundle:Category')->findOneByName($category_name);
 
+        //$dql = "SELECT p FROM AppBundle:Product p JOIN p.categories c ";
+        $dql = "SELECT p FROM AppBundle:Product p JOIN p.categories c WHERE c.name = '$category_name'";
+        $query = $em->createQuery($dql);
+
+
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1),/*page number*/
+            5/*limit per page*/
+        );
+
+
         return $this->render('AppBundle:Index:category.html.twig', [
             'categories' => $categories,
             'category' => $category,
             'category_name' => $category_name,
+            'pagination' => $pagination,
         ]);
     }
 }
